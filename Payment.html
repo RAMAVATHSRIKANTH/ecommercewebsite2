@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .payment-option {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+            cursor: pointer;
+            background: #fafafa;
+        }
+        .payment-option:hover {
+            background: #eaeaea;
+        }
+        .payment-option input {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Choose Payment Option</h2>
+        <form id="payment-form">
+            <!-- UPI Section -->
+            <div class="payment-option">
+                <input type="radio" name="payment-method" id="upi" value="upi" required>
+                <label for="upi">UPI</label>
+                <div id="upi-options">
+                    <input type="radio" name="upi-app" id="gpay" value="gpay">
+                    <label for="gpay">GPay</label>
+                    <input type="radio" name="upi-app" id="phonepe" value="phonepe">
+                    <label for="phonepe">PhonePe</label>
+                    <input type="radio" name="upi-app" id="paytm" value="paytm">
+                    <label for="paytm">Paytm</label>
+                </div>
+            </div>
+            <!-- Net Banking -->
+            <div class="payment-option">
+                <input type="radio" name="payment-method" id="net-banking" value="net-banking">
+                <label for="net-banking">Net Banking</label>
+            </div>
+            <!-- Credit/Debit/ATM Card -->
+            <div class="payment-option">
+                <input type="radio" name="payment-method" id="card" value="card">
+                <label for="card">Credit/Debit/ATM Card</label>
+                <div id="card-details" style="display: none;">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                    <br>
+                    <label for="expiry-date">Expiry Date:</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY">
+                    <br>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="123">
+                </div>
+            </div>
+            <!-- Wallet -->
+            <div class="payment-option">
+                <input type="radio" name="payment-method" id="wallet" value="wallet">
+                <label for="wallet">Wallet</label>
+            </div>
+            <!-- EMI -->
+            <div class="payment-option">
+                <input type="radio" name="payment-method" id="emi" value="emi">
+                <label for="emi">EMI</label>
+            </div>
+            <button type="submit" class="submit-btn">Proceed to Pay</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("payment-form").addEventListener("change", function (event) {
+            const cardDetails = document.getElementById("card-details");
+            if (event.target.id === "card") {
+                cardDetails.style.display = "block";
+            } else {
+                cardDetails.style.display = "none";
+            }
+        });
+
+        document.getElementById("payment-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            alert(`You selected: ${paymentMethod}. Proceeding to payment gateway...`);
+            // Add integration with payment gateway here.
+        });
+    </script>
+</body>
+</html>
